@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>사과게임</title>
+<meta name="description" content="드래그로 합이 10이 되는 사과를 지우는 사과게임(Fruit Box). 2분 안에 최고 점수에 도전해 보세요.">
+<meta name="theme-color" content="#dce5c8">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='18' r='12' fill='%23ef5136'/%3E%3Cpath d='M17 7c3-3 6-3 6-3s0 4-3 5.5S17 10 17 7z' fill='%234aa34f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ─────────────  타이틀 화면  ───────────── -->
+  <section class="screen screen--title is-active" id="titleScreen">
+    <div class="ghost-field" id="ghostField" aria-hidden="true"></div>
+
+    <div class="title-content">
+      <h1 class="title-logo">사과게임</h1>
+      <button class="btn-play" id="playBtn" type="button">
+        <svg class="btn-play__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.53.85l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5z"/></svg>
+        <span>플레이</span>
+      </button>
+      <p class="title-best" id="titleBest" hidden>최고 점수 <b>0</b></p>
+    </div>
+  </section>
+
+  <!-- ─────────────  게임 화면  ─────────────
+       세로 화면에서는 .game-inner 전체를 90도 돌려 보드를 크게 쓴다. -->
+  <section class="screen screen--game" id="gameScreen">
+   <div class="game-inner" id="gameInner">
+    <header class="hud">
+      <button class="icon-btn" id="homeBtn" type="button" aria-label="홈으로">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 2.6 11.1a1 1 0 0 0 .64 1.77H5v7.03c0 .6.48 1.1 1.08 1.1h3.3v-5.3h5.24V21h3.3c.6 0 1.08-.5 1.08-1.1v-7.03h1.76a1 1 0 0 0 .64-1.77L12 3.2z"/></svg>
+      </button>
+
+      <div class="timer" role="timer" aria-live="off">
+        <svg class="timer__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path class="timer__hands" d="M13 11.6V6h-2v6.55l4.6 2.75 1-1.66L13 11.6z"/>
+        </svg>
+        <span class="timer__text" id="timeText">120</span>
+        <div class="timer__bar"><i class="timer__fill" id="timeFill"></i></div>
+      </div>
+
+      <div class="score-chip">
+        <span class="score-chip__label">Score</span>
+        <b class="score-chip__value" id="scoreText">0</b>
+      </div>
+    </header>
+
+    <div class="board-wrap" id="boardWrap">
+      <div class="board" id="board">
+        <div class="selection" id="selection" hidden></div>
+        <div class="sum-badge" id="sumBadge" hidden>0</div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <!-- 결과 오버레이 (게임 프레임 안에 있어야 세로 화면에서 함께 회전한다) -->
+    <div class="overlay" id="resultOverlay" hidden>
+      <div class="result-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <p class="result-card__title" id="resultTitle">타임 오버!</p>
+        <p class="result-card__score"><b id="finalScore">0</b><span> / 162</span></p>
+        <p class="result-card__best">최고 점수 <b id="bestScore">0</b></p>
+        <div class="result-card__actions">
+          <button class="btn btn--primary" id="retryBtn" type="button">다시하기</button>
+          <button class="btn btn--ghost" id="toTitleBtn" type="button">홈으로</button>
+        </div>
+      </div>
+    </div>
+   </div>
+  </section>
+
+</div>
+
+<noscript>
+  <p style="padding:24px;font:16px/1.6 sans-serif;text-align:center">
+    사과게임을 즐기려면 자바스크립트를 켜 주세요.
+  </p>
+</noscript>
+
+<script src="js/board.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
